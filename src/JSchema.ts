@@ -191,7 +191,7 @@ function scanInputKeys(keys: string[], json: { [key: string]: any }, path?: stri
 // 检查 json 数据结构的主函数
 export function vjs(target: any, schema: schemaType, refs?: schemaRefType, path?: string[]) : boolean {
     let chain = (path === undefined) ? [] : JSON.parse(JSON.stringify(path))
-    if (chain.length === 0) chain.push(`vjs:/`)
+    if (chain.length === 0) chain.push(`vjs:root`)
     chain.push(`validate:${schema.type}`)
     // 创建一个副本用于 catch，因为 chain 是引用类型，可能会在 try 里被修改
     let errChain = JSON.parse(JSON.stringify(chain))

@@ -1,6 +1,6 @@
 {
   "name": "fsp-jschema",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A JsonSchema validator written in TypeScript, compatible with both Nodejs and Deno.",
   "main": "./dist/cjs/JSchema.js",
   "module": "./dist/esm/JSchema.js",

@@ -53,7 +53,7 @@ Deno.test({
                 type: typeStr
             })
         },
-        `[ValidationError@vjs://validate:string]: Validation Failed <= [SchemaDefError@vjs://validate:string/required]: Invalid Schema Key, should be a boolean, but we got '""'`)
+        `[ValidationError@vjs:root/validate:string]: Validation Failed <= [SchemaDefError@vjs:root/validate:string/required]: Invalid Schema Key, should be a boolean, but we got '""'`)
         // 不满足时的报错
         assertError(()=>{
             res = vjs(undefined,{
@@ -61,14 +61,14 @@ Deno.test({
                 type: typeStr
             })
         },
-        `[ValidationError@vjs://validate:string]: Validation Failed <= [TargetMissingError@vjs://validate:string/required]: Target Required, but we got 'undefined'`)
+        `[ValidationError@vjs:root/validate:string]: Validation Failed <= [TargetMissingError@vjs:root/validate:string/required]: Target Required, but we got 'undefined'`)
         assertError(()=>{
             res = vjs(null,{
                 required: true,
                 type: typeStr
             })
         },
-        `[ValidationError@vjs://validate:string]: Validation Failed <= [TargetMissingError@vjs://validate:string/required]: Target Required, but we got 'null'`)
+        `[ValidationError@vjs:root/validate:string]: Validation Failed <= [TargetMissingError@vjs:root/validate:string/required]: Target Required, but we got 'null'`)
     },
 });
 
@@ -83,7 +83,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = '[ValidationError@vjs://validate:string]: Validation Failed <= [StringValidationError@vjs://validate:string]: String Validation Failed <= [TargetTypeError@vjs://validate:string]: Wrong Type'
+            const typeErrInfo = '[ValidationError@vjs:root/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:string]: String Validation Failed <= [TargetTypeError@vjs:root/validate:string]: Wrong Type'
             assertError(()=>{
                 return vjs(123,schema)
             },typeErrInfo)
@@ -119,21 +119,21 @@ Deno.test({
                     maxLength: 2
                 })
             },
-            '[ValidationError@vjs://validate:string]: Validation Failed <= [StringValidationError@vjs://validate:string]: String Validation Failed <= [SchemaDefError@vjs://validate:string/minLength&maxLength]: Invalid Schema Rule')
+            '[ValidationError@vjs:root/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:string]: String Validation Failed <= [SchemaDefError@vjs:root/validate:string/minLength&maxLength]: Invalid Schema Rule')
             assertError(()=>{
                 return vjs('',{
                     type: typeStr,
                     minLength: 1
                 })
             },
-            '[ValidationError@vjs://validate:string]: Validation Failed <= [StringValidationError@vjs://validate:string]: String Validation Failed <= [RestrictionError@vjs://validate:string/minLength|maxLength]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:string]: String Validation Failed <= [RestrictionError@vjs:root/validate:string/minLength|maxLength]: Restriction Not Satisfied')
             assertError(()=>{
                 return vjs('123456',{
                     type: typeStr,
                     maxLength: 5
                 })
             },
-            '[ValidationError@vjs://validate:string]: Validation Failed <= [StringValidationError@vjs://validate:string]: String Validation Failed <= [RestrictionError@vjs://validate:string/minLength|maxLength]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:string]: String Validation Failed <= [RestrictionError@vjs:root/validate:string/minLength|maxLength]: Restriction Not Satisfied')
             res = vjs('你好',{
                 type: typeStr,
                 minLength: 2,
@@ -155,7 +155,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = `[ValidationError@vjs://validate:boolean]: Validation Failed <= [BooleanValidationError@vjs://validate:boolean]: Boolean Validation Failed <= [TargetTypeError@vjs://validate:boolean]: Wrong Type`
+            const typeErrInfo = `[ValidationError@vjs:root/validate:boolean]: Validation Failed <= [BooleanValidationError@vjs:root/validate:boolean]: Boolean Validation Failed <= [TargetTypeError@vjs:root/validate:boolean]: Wrong Type`
             assertError(()=>{
                 return vjs(0,schema)
             },typeErrInfo)
@@ -200,7 +200,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = '[ValidationError@vjs://validate:integer]: Validation Failed <= [IntegerValidationError@vjs://validate:integer]: Integer Validation Failed <= [TargetTypeError@vjs://validate:integer]: Wrong Type'
+            const typeErrInfo = '[ValidationError@vjs:root/validate:integer]: Validation Failed <= [IntegerValidationError@vjs:root/validate:integer]: Integer Validation Failed <= [TargetTypeError@vjs:root/validate:integer]: Wrong Type'
             assertError(()=>{
                 return vjs('',schema)
             },typeErrInfo)
@@ -239,21 +239,21 @@ Deno.test({
                     max: 2
                 })
             },
-            '[ValidationError@vjs://validate:integer]: Validation Failed <= [IntegerValidationError@vjs://validate:integer]: Integer Validation Failed <= [SchemaDefError@vjs://validate:integer/min&max]: Invalid Schema Rule')
+            '[ValidationError@vjs:root/validate:integer]: Validation Failed <= [IntegerValidationError@vjs:root/validate:integer]: Integer Validation Failed <= [SchemaDefError@vjs:root/validate:integer/min&max]: Invalid Schema Rule')
             assertError(()=>{
                 return vjs(0,{
                     type: typeStr,
                     min: 1
                 })
             },
-            '[ValidationError@vjs://validate:integer]: Validation Failed <= [IntegerValidationError@vjs://validate:integer]: Integer Validation Failed <= [RestrictionError@vjs://validate:integer/min|max]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:integer]: Validation Failed <= [IntegerValidationError@vjs:root/validate:integer]: Integer Validation Failed <= [RestrictionError@vjs:root/validate:integer/min|max]: Restriction Not Satisfied')
             assertError(()=>{
                 return vjs(6,{
                     type: typeStr,
                     max: 5
                 })
             },
-            '[ValidationError@vjs://validate:integer]: Validation Failed <= [IntegerValidationError@vjs://validate:integer]: Integer Validation Failed <= [RestrictionError@vjs://validate:integer/min|max]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:integer]: Validation Failed <= [IntegerValidationError@vjs:root/validate:integer]: Integer Validation Failed <= [RestrictionError@vjs:root/validate:integer/min|max]: Restriction Not Satisfied')
             res = vjs(2,{
                 type: typeStr,
                 min: 2,
@@ -275,7 +275,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = '[ValidationError@vjs://validate:number]: Validation Failed <= [NumberValidationError@vjs://validate:number]: Number Validation Failed <= [TargetTypeError@vjs://validate:number]: Wrong Type'
+            const typeErrInfo = '[ValidationError@vjs:root/validate:number]: Validation Failed <= [NumberValidationError@vjs:root/validate:number]: Number Validation Failed <= [TargetTypeError@vjs:root/validate:number]: Wrong Type'
             assertError(()=>{
                 return vjs('',schema)
             },typeErrInfo)
@@ -321,21 +321,21 @@ Deno.test({
                     max: 2
                 })
             },
-            '[ValidationError@vjs://validate:number]: Validation Failed <= [NumberValidationError@vjs://validate:number]: Number Validation Failed <= [SchemaDefError@vjs://validate:number/min&max]: Invalid Schema Rule')
+            '[ValidationError@vjs:root/validate:number]: Validation Failed <= [NumberValidationError@vjs:root/validate:number]: Number Validation Failed <= [SchemaDefError@vjs:root/validate:number/min&max]: Invalid Schema Rule')
             assertError(()=>{
                 return vjs(1.3,{
                     type: typeStr,
                     min: 1.5
                 })
             },
-            '[ValidationError@vjs://validate:number]: Validation Failed <= [NumberValidationError@vjs://validate:number]: Number Validation Failed <= [RestrictionError@vjs://validate:number/min|max]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:number]: Validation Failed <= [NumberValidationError@vjs:root/validate:number]: Number Validation Failed <= [RestrictionError@vjs:root/validate:number/min|max]: Restriction Not Satisfied')
             assertError(()=>{
                 return vjs(5.6,{
                     type: typeStr,
                     max: 5
                 })
             },
-            '[ValidationError@vjs://validate:number]: Validation Failed <= [NumberValidationError@vjs://validate:number]: Number Validation Failed <= [RestrictionError@vjs://validate:number/min|max]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:number]: Validation Failed <= [NumberValidationError@vjs:root/validate:number]: Number Validation Failed <= [RestrictionError@vjs:root/validate:number/min|max]: Restriction Not Satisfied')
         }
     },
 });
@@ -351,7 +351,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = '[ValidationError@vjs://validate:date]: Validation Failed <= [DateValidationError@vjs://validate:date]: Date Validation Failed <= [TargetTypeError@vjs://validate:date]: Wrong Type'
+            const typeErrInfo = '[ValidationError@vjs:root/validate:date]: Validation Failed <= [DateValidationError@vjs:root/validate:date]: Date Validation Failed <= [TargetTypeError@vjs:root/validate:date]: Wrong Type'
             assertError(()=>{
                 return vjs('',schema)
             },typeErrInfo)
@@ -390,21 +390,21 @@ Deno.test({
                     max: new Date(1999,0,0)
                 })
             },
-            '[ValidationError@vjs://validate:date]: Validation Failed <= [DateValidationError@vjs://validate:date]: Date Validation Failed <= [SchemaDefError@vjs://validate:date/min&max]: Invalid Schema Rule')
+            '[ValidationError@vjs:root/validate:date]: Validation Failed <= [DateValidationError@vjs:root/validate:date]: Date Validation Failed <= [SchemaDefError@vjs:root/validate:date/min&max]: Invalid Schema Rule')
             assertError(()=>{
                 return vjs(new Date(),{
                     type: typeStr,
                     min: new Date(2022,0,0)
                 })
             },
-            '[ValidationError@vjs://validate:date]: Validation Failed <= [DateValidationError@vjs://validate:date]: Date Validation Failed <= [RestrictionError@vjs://validate:date/min|max]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:date]: Validation Failed <= [DateValidationError@vjs:root/validate:date]: Date Validation Failed <= [RestrictionError@vjs:root/validate:date/min|max]: Restriction Not Satisfied')
             assertError(()=>{
                 return vjs(new Date(),{
                     type: typeStr,
                     max: new Date(2000,0,0)
                 })
             },
-            '[ValidationError@vjs://validate:date]: Validation Failed <= [DateValidationError@vjs://validate:date]: Date Validation Failed <= [RestrictionError@vjs://validate:date/min|max]: Restriction Not Satisfied')
+            '[ValidationError@vjs:root/validate:date]: Validation Failed <= [DateValidationError@vjs:root/validate:date]: Date Validation Failed <= [RestrictionError@vjs:root/validate:date/min|max]: Restriction Not Satisfied')
             res = vjs(new Date(1999,1,1),{
                 type: typeStr,
                 min: new Date(1999,1,1),
@@ -426,7 +426,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = '[ValidationError@vjs://validate:function]: Validation Failed <= [FunctionValidationError@vjs://validate:function]: Function Validation Failed <= [TargetTypeError@vjs://validate:function]: Wrong Type'
+            const typeErrInfo = '[ValidationError@vjs:root/validate:function]: Validation Failed <= [FunctionValidationError@vjs:root/validate:function]: Function Validation Failed <= [TargetTypeError@vjs:root/validate:function]: Wrong Type'
             assertError(()=>{
                 return vjs(0,schema)
             },typeErrInfo)
@@ -482,7 +482,7 @@ Deno.test({
             assertError(()=>{
                 return vjs('',schema)
             },
-            '[ValidationError@vjs://validate:enum]: Validation Failed <= [EnumValidationError@vjs://validate:enum]: Enum Validation Failed <= [KeyMissingError@vjs://validate:enum/JEnumSchema:constructor]: Schema Key Required - [items]')
+            '[ValidationError@vjs:root/validate:enum]: Validation Failed <= [EnumValidationError@vjs:root/validate:enum]: Enum Validation Failed <= [KeyMissingError@vjs:root/validate:enum/JEnumSchema:constructor]: Schema Key Required - [items]')
             // items 没有元素
             assertError(()=>{
                 return vjs('',{
@@ -490,7 +490,7 @@ Deno.test({
                     items: []
                 })
             },
-            '[ValidationError@vjs://validate:enum]: Validation Failed <= [EnumValidationError@vjs://validate:enum]: Enum Validation Failed <= [SchemaDefError@vjs://validate:enum/JEnumSchema:constructor]: Invalid Schema Key - [items] must be a non-zero-item Array')
+            '[ValidationError@vjs:root/validate:enum]: Validation Failed <= [EnumValidationError@vjs:root/validate:enum]: Enum Validation Failed <= [SchemaDefError@vjs:root/validate:enum/JEnumSchema:constructor]: Invalid Schema Key - [items] must be a non-zero-item Array')
             // items 类型错误
             assertError(()=>{
                 return vjs('',{
@@ -498,7 +498,7 @@ Deno.test({
                     items: true
                 })
             },
-            '[ValidationError@vjs://validate:enum]: Validation Failed <= [EnumValidationError@vjs://validate:enum]: Enum Validation Failed <= [SchemaDefError@vjs://validate:enum/JEnumSchema:constructor]: Invalid Schema Key - [items] must be an Array')
+            '[ValidationError@vjs:root/validate:enum]: Validation Failed <= [EnumValidationError@vjs:root/validate:enum]: Enum Validation Failed <= [SchemaDefError@vjs:root/validate:enum/JEnumSchema:constructor]: Invalid Schema Key - [items] must be an Array')
             // 没有匹配的 enum 值
             assertError(()=>{
                 return vjs('',{
@@ -506,7 +506,7 @@ Deno.test({
                     items: [123,456,true]
                 })
             },
-            `[ValidationError@vjs://validate:enum]: Validation Failed <= [EnumValidationError@vjs://validate:enum]: Enum Validation Failed <= [RestrictionError@vjs://validate:enum/items]: Not Valid Enum Item - '""'`)
+            `[ValidationError@vjs:root/validate:enum]: Validation Failed <= [EnumValidationError@vjs:root/validate:enum]: Enum Validation Failed <= [RestrictionError@vjs:root/validate:enum/items]: Not Valid Enum Item - '""'`)
         }
         // 正常值
         {
@@ -545,23 +545,23 @@ Deno.test({
             assertError(()=>{
                 return vjs(123,schema)
             },
-            `[ValidationError@vjs://validate:regexp]: Validation Failed <= [RegExpValidationError@vjs://validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs://validate:regexp/expression]: RegExp Restriction Not Satisfied - '123'`)
+            `[ValidationError@vjs:root/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs:root/validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs:root/validate:regexp/expression]: RegExp Restriction Not Satisfied - '123'`)
             assertError(()=>{
                 return vjs(true,schema)
             },
-            `[ValidationError@vjs://validate:regexp]: Validation Failed <= [RegExpValidationError@vjs://validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs://validate:regexp/expression]: RegExp Restriction Not Satisfied - 'true'`)
+            `[ValidationError@vjs:root/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs:root/validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs:root/validate:regexp/expression]: RegExp Restriction Not Satisfied - 'true'`)
             assertError(()=>{
                 return vjs(function(){},schema)
             },
-            `[ValidationError@vjs://validate:regexp]: Validation Failed <= [RegExpValidationError@vjs://validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs://validate:regexp/expression]: RegExp Restriction Not Satisfied - 'undefined'`)
+            `[ValidationError@vjs:root/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs:root/validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs:root/validate:regexp/expression]: RegExp Restriction Not Satisfied - 'undefined'`)
             assertError(()=>{
                 return vjs([],schema)
             },
-            `[ValidationError@vjs://validate:regexp]: Validation Failed <= [RegExpValidationError@vjs://validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs://validate:regexp/expression]: RegExp Restriction Not Satisfied - '[]'`)
+            `[ValidationError@vjs:root/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs:root/validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs:root/validate:regexp/expression]: RegExp Restriction Not Satisfied - '[]'`)
             assertError(()=>{
                 return vjs({},schema)
             },
-            `[ValidationError@vjs://validate:regexp]: Validation Failed <= [RegExpValidationError@vjs://validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs://validate:regexp/expression]: RegExp Restriction Not Satisfied - '{}'`)
+            `[ValidationError@vjs:root/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs:root/validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs:root/validate:regexp/expression]: RegExp Restriction Not Satisfied - '{}'`)
         }
         // 正常值
         {
@@ -581,7 +581,7 @@ Deno.test({
             assertError(()=>{
                 return vjs('汉字',schema)
             },
-            `[ValidationError@vjs://validate:regexp]: Validation Failed <= [RegExpValidationError@vjs://validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs://validate:regexp/expression]: RegExp Restriction Not Satisfied - '"汉字"'`)
+            `[ValidationError@vjs:root/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs:root/validate:regexp]: RegExp Validation Failed <= [RestrictionError@vjs:root/validate:regexp/expression]: RegExp Restriction Not Satisfied - '"汉字"'`)
             const rule = {
                 type: SchemaTypes.REGEXP,
                 expression: /^[^\d\s\*\,=>]+[^\s\*\,=>]*([^\d\s\*\,=>]*(=>)?[^\d\s\*\,=>]+[^\s\*\,=>]*)?([\,]{1}[^\d\s\*\,=>]+[^\s\*\,=>]*([^\d\s\*\,=>]*(=>)?[^\d\s\*\,=>]+[^\s\*\,=>]*)?)*$/
@@ -605,7 +605,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = '[ValidationError@vjs://validate:object]: Validation Failed <= [ObjectValidationError@vjs://validate:object]: Object Validation Failed <= [TargetTypeError@vjs://validate:object]: Wrong Type'
+            const typeErrInfo = '[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [TargetTypeError@vjs:root/validate:object]: Wrong Type'
             assertError(()=>{
                 return vjs('',schema)
             },typeErrInfo)
@@ -789,7 +789,7 @@ Deno.test({
                     }
                 })
             },
-            `[ValidationError@vjs://validate:object]: Validation Failed <= [ObjectValidationError@vjs://validate:object]: Object Validation Failed <= [RestrictionError@vjs://validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs://validate:object/properties/c/validate:string]: Validation Failed <= [TargetMissingError@vjs://validate:object/properties/c/validate:string/required]: Target Required, but we got 'undefined'`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs:root/validate:object/properties/c/validate:string]: Validation Failed <= [TargetMissingError@vjs:root/validate:object/properties/c/validate:string/required]: Target Required, but we got 'undefined'`)
             // 字段数形约束条件不满足
             assertError(()=>{
                 return vjs({
@@ -820,7 +820,7 @@ Deno.test({
                     }
                 })
             },
-            `[ValidationError@vjs://validate:object]: Validation Failed <= [ObjectValidationError@vjs://validate:object]: Object Validation Failed <= [RestrictionError@vjs://validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs://validate:object/properties/c/validate:string]: Validation Failed <= [StringValidationError@vjs://validate:object/properties/c/validate:string]: String Validation Failed <= [RestrictionError@vjs://validate:object/properties/c/validate:string/minLength|maxLength]: Restriction Not Satisfied`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs:root/validate:object/properties/c/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:object/properties/c/validate:string]: String Validation Failed <= [RestrictionError@vjs:root/validate:object/properties/c/validate:string/minLength|maxLength]: Restriction Not Satisfied`)
             // 不允许其它字段
             assertError(()=>{
                 return vjs({
@@ -840,7 +840,7 @@ Deno.test({
                     additionalProperties: false
                 })
             },
-            `[ValidationError@vjs://validate:object]: Validation Failed <= [ObjectValidationError@vjs://validate:object]: Object Validation Failed <= [RestrictionError@vjs://validate:object/properties]: Properties Restriction Not Satisfied <= [InvalidPropertyError@vjs://validate:object/properties/e]: Property Not Allowed`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [InvalidPropertyError@vjs:root/validate:object/properties/e]: Property Not Allowed`)
             // 属性值类型约定
             assertError(()=>{
                 return vjs({
@@ -856,7 +856,7 @@ Deno.test({
                     }
                 })
             },
-            `[ValidationError@vjs://validate:object]: Validation Failed <= [ObjectValidationError@vjs://validate:object]: Object Validation Failed <= [RestrictionError@vjs://validate:object/values]: Values Validation Failed`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/values]: Values Validation Failed`)
             assertError(()=>{
                 return vjs({
                     a: true,
@@ -871,7 +871,7 @@ Deno.test({
                     }]
                 })
             },
-            `[ValidationError@vjs://validate:object]: Validation Failed <= [ObjectValidationError@vjs://validate:object]: Object Validation Failed <= [RestrictionError@vjs://validate:object/values]: Values Validation Failed`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/values]: Values Validation Failed`)
         }
     },
 });
@@ -887,7 +887,7 @@ Deno.test({
         let res = true
         // 其它类型
         {
-            const typeErrInfo = '[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [TargetTypeError@vjs://validate:array]: Wrong Type'
+            const typeErrInfo = '[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [TargetTypeError@vjs:root/validate:array]: Wrong Type'
             assertError(()=>{
                 res = vjs('',schema)
             },typeErrInfo)
@@ -1002,7 +1002,7 @@ Deno.test({
                     ]
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/items]: Items Restriction Not Satisfied <= [ValidationError@vjs://validate:array/items/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs://validate:array/items/validate:regexp]: RegExp Validation Failed <= [SchemaDefError@vjs://validate:array/items/validate:regexp/scanInputKeys:rule]: Invalid Schema Key - [rule]`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/items]: Items Restriction Not Satisfied <= [ValidationError@vjs:root/validate:array/items/validate:regexp]: Validation Failed <= [RegExpValidationError@vjs:root/validate:array/items/validate:regexp]: RegExp Validation Failed <= [SchemaDefError@vjs:root/validate:array/items/validate:regexp/scanInputKeys:rule]: Invalid Schema Key - [rule]`)
             // 规则冲突
             assertError(()=>{
                 res = vjs([],{
@@ -1011,7 +1011,7 @@ Deno.test({
                     maxItemsCount: 1
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [SchemaDefError@vjs://validate:array/minItemsCount&maxItemsCount]: Invalid Schema Rule`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [SchemaDefError@vjs:root/validate:array/minItemsCount&maxItemsCount]: Invalid Schema Rule`)
             // 元素个数限制
             assertError(()=>{
                 res = vjs([1],{
@@ -1019,14 +1019,14 @@ Deno.test({
                     minItemsCount: 2,
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/minItemsCount|maxItemsCount]: Items Restriction Not Satisfied`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/minItemsCount|maxItemsCount]: Items Restriction Not Satisfied`)
             assertError(()=>{
                 res = vjs([1,2,3],{
                     type: typeStr,
                     maxItemsCount: 2,
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/minItemsCount|maxItemsCount]: Items Restriction Not Satisfied`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/minItemsCount|maxItemsCount]: Items Restriction Not Satisfied`)
             // items 和 itemsInOrder 不能同时出现
             assertError(()=>{
                 res = vjs([1,2,3],{
@@ -1041,7 +1041,7 @@ Deno.test({
                     }]
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [SchemaDefError@vjs://validate:array/items&itemsInOrder]: Invalid Schema Rule, [items] and [itemsInOrder] can't be defined at the same time`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [SchemaDefError@vjs:root/validate:array/items&itemsInOrder]: Invalid Schema Rule, [items] and [itemsInOrder] can't be defined at the same time`)
             // 一种类型限定
             assertError(()=>{
                 res = vjs([1,2,3],{
@@ -1052,7 +1052,7 @@ Deno.test({
                     }
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/items]: Items Restriction Not Satisfied <= [ValidationError@vjs://validate:array/items/validate:string]: Validation Failed <= [StringValidationError@vjs://validate:array/items/validate:string]: String Validation Failed <= [TargetTypeError@vjs://validate:array/items/validate:string]: Wrong Type`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/items]: Items Restriction Not Satisfied <= [ValidationError@vjs:root/validate:array/items/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:array/items/validate:string]: String Validation Failed <= [TargetTypeError@vjs:root/validate:array/items/validate:string]: Wrong Type`)
             // 多种类型限定
             assertError(()=>{
                 res = vjs([1,2,'3'],{
@@ -1069,7 +1069,7 @@ Deno.test({
                     ]
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/items]: Items Restriction Not Satisfied <= [RestrictionError@vjs://validate:array/items]: Items Validation Failed - Zero Match`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/items]: Items Restriction Not Satisfied <= [RestrictionError@vjs:root/validate:array/items]: Items Validation Failed - Zero Match`)
             // items 类型不正确
             assertError(()=>{
                 res = vjs([1,2,3],{
@@ -1077,7 +1077,7 @@ Deno.test({
                     items: true
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/items]: Items Restriction Not Satisfied <= [GetPropertyValueFailed@vjs://validate:array/items/getValue:items]: Get Property Value Failed - [items] <= [ValidationError@vjs://validate:array/items/getValue:items/validate:object]: Validation Failed <= [ObjectValidationError@vjs://validate:array/items/getValue:items/validate:object]: Object Validation Failed <= [TargetTypeError@vjs://validate:array/items/getValue:items/validate:object]: Wrong Type`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/items]: Items Restriction Not Satisfied <= [GetPropertyValueFailed@vjs:root/validate:array/items/getValue:items]: Get Property Value Failed - [items] <= [ValidationError@vjs:root/validate:array/items/getValue:items/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:array/items/getValue:items/validate:object]: Object Validation Failed <= [TargetTypeError@vjs:root/validate:array/items/getValue:items/validate:object]: Wrong Type`)
             // 按顺序限制元素类型
             assertError(()=>{
                 res = vjs([1,2],{
@@ -1094,7 +1094,7 @@ Deno.test({
                     ]
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/itemsInOrder]: Items Restriction Not Satisfied <= [RestrictionError@vjs://validate:array/itemsInOrder]: Items Validation Failed <= [ValidationError@vjs://validate:array/itemsInOrder/validate:string]: Validation Failed <= [StringValidationError@vjs://validate:array/itemsInOrder/validate:string]: String Validation Failed <= [TargetTypeError@vjs://validate:array/itemsInOrder/validate:string]: Wrong Type`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/itemsInOrder]: Items Restriction Not Satisfied <= [RestrictionError@vjs:root/validate:array/itemsInOrder]: Items Validation Failed <= [ValidationError@vjs:root/validate:array/itemsInOrder/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:array/itemsInOrder/validate:string]: String Validation Failed <= [TargetTypeError@vjs:root/validate:array/itemsInOrder/validate:string]: Wrong Type`)
             // 不允许多余的元素
             assertError(()=>{
                 res = vjs(['1',2,'3'],{
@@ -1112,7 +1112,7 @@ Deno.test({
                     additionalItems: false
                 })
             },
-            `[ValidationError@vjs://validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:array]: Array Validation Failed <= [RestrictionError@vjs://validate:array/itemsInOrder]: Items Restriction Not Satisfied <= [RestrictionError@vjs://validate:array/additionalItems]: Additional Items Not Allowed`)
+            `[ValidationError@vjs:root/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:array]: Array Validation Failed <= [RestrictionError@vjs:root/validate:array/itemsInOrder]: Items Restriction Not Satisfied <= [RestrictionError@vjs:root/validate:array/additionalItems]: Additional Items Not Allowed`)
         }
     },
 });
@@ -1169,7 +1169,7 @@ Deno.test({
                     quotable
                 })
             },
-            `[ValidationError@vjs://validate:quotable]: Validation Failed <= [QuotableValidationError@vjs://validate:quotable]: Quotable Validation Failed <= [SchemaDefError@vjs://validate:quotable/schema]: Invalid Schema Key - [schema] must be a string starts with '$'`)
+            `[ValidationError@vjs:root/validate:quotable]: Validation Failed <= [QuotableValidationError@vjs:root/validate:quotable]: Quotable Validation Failed <= [SchemaDefError@vjs:root/validate:quotable/schema]: Invalid Schema Key - [schema] must be a string starts with '$'`)
             // 找不到引用对象
             assertError(()=>{
                 vjs('',{
@@ -1179,7 +1179,7 @@ Deno.test({
                     quotable
                 })
             },
-            `[ValidationError@vjs://validate:quotable]: Validation Failed <= [QuotableValidationError@vjs://validate:quotable]: Quotable Validation Failed <= [SchemaDefError@vjs://validate:quotable/schema/quotabl]: Invalid Quotable Schema Key - quotable schema key [quotabl] not found in refs`)
+            `[ValidationError@vjs:root/validate:quotable]: Validation Failed <= [QuotableValidationError@vjs:root/validate:quotable]: Quotable Validation Failed <= [SchemaDefError@vjs:root/validate:quotable/schema/quotabl]: Invalid Quotable Schema Key - quotable schema key [quotabl] not found in refs`)
             // 校验失败
             assertError(()=>{
                 return vjs('23',{
@@ -1189,7 +1189,7 @@ Deno.test({
                     quotable
                 })
             },
-            `[ValidationError@vjs://validate:quotable]: Validation Failed <= [QuotableValidationError@vjs://validate:quotable]: Quotable Validation Failed <= [ValidationError@vjs://validate:quotable/validate:string]: Validation Failed <= [StringValidationError@vjs://validate:quotable/validate:string]: String Validation Failed <= [RestrictionError@vjs://validate:quotable/validate:string/minLength|maxLength]: Restriction Not Satisfied`)
+            `[ValidationError@vjs:root/validate:quotable]: Validation Failed <= [QuotableValidationError@vjs:root/validate:quotable]: Quotable Validation Failed <= [ValidationError@vjs:root/validate:quotable/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:quotable/validate:string]: String Validation Failed <= [RestrictionError@vjs:root/validate:quotable/validate:string/minLength|maxLength]: Restriction Not Satisfied`)
         }
     }
 })
@@ -1225,7 +1225,7 @@ Deno.test({
                 ]
             })
         },
-        `[ValidationError@vjs://validate:string]: Validation Failed <= [StringValidationError@vjs://validate:string]: String Validation Failed <= [SchemaDefError@vjs://validate:string/scanInputKeys:oneOf]: Invalid Schema Key - [oneOf]`)
+        `[ValidationError@vjs:root/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:string]: String Validation Failed <= [SchemaDefError@vjs:root/validate:string/scanInputKeys:oneOf]: Invalid Schema Key - [oneOf]`)
         // oneOf 配置错误
         assertError(()=>{
             res = vjs(true,{
@@ -1240,7 +1240,7 @@ Deno.test({
                 }
             })
         },
-        `[ValidationError@vjs://validate:multiple]: Validation Failed <= [MultipleValidationError@vjs://validate:multiple]: Multiple Validation Failed <= [SchemaDefError@vjs://validate:multiple]: Invalid Schema Key - [oneOf] must be an Array of JSchema <= [ValidationError@vjs://validate:multiple/oneOf/validate:array]: Validation Failed <= [ArrayValidationError@vjs://validate:multiple/oneOf/validate:array]: Array Validation Failed <= [TargetTypeError@vjs://validate:multiple/oneOf/validate:array]: Wrong Type`)
+        `[ValidationError@vjs:root/validate:multiple]: Validation Failed <= [MultipleValidationError@vjs:root/validate:multiple]: Multiple Validation Failed <= [SchemaDefError@vjs:root/validate:multiple]: Invalid Schema Key - [oneOf] must be an Array of JSchema <= [ValidationError@vjs:root/validate:multiple/oneOf/validate:array]: Validation Failed <= [ArrayValidationError@vjs:root/validate:multiple/oneOf/validate:array]: Array Validation Failed <= [TargetTypeError@vjs:root/validate:multiple/oneOf/validate:array]: Wrong Type`)
         // 一个都不匹配
         assertError(()=>{
             res = vjs(true,{
@@ -1255,7 +1255,7 @@ Deno.test({
                 ]
             })
         },
-        `[ValidationError@vjs://validate:multiple]: Validation Failed <= [MultipleValidationError@vjs://validate:multiple]: Multiple Validation Failed <= [RestrictionError@vjs://validate:multiple/oneOf]: No One Matches`)
+        `[ValidationError@vjs:root/validate:multiple]: Validation Failed <= [MultipleValidationError@vjs:root/validate:multiple]: Multiple Validation Failed <= [RestrictionError@vjs:root/validate:multiple/oneOf]: No One Matches`)
         // 复杂类型匹配
         const oneOf = [
             {
