@@ -789,7 +789,7 @@ Deno.test({
                     }
                 })
             },
-            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs:root/validate:object/properties/c/validate:string]: Validation Failed <= [TargetMissingError@vjs:root/validate:object/properties/c/validate:string/required]: Target Required, but we got 'undefined'`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs:root/validate:object/properties:c/validate:string]: Validation Failed <= [TargetMissingError@vjs:root/validate:object/properties:c/validate:string/required]: Target Required, but we got 'undefined'`)
             // 字段数形约束条件不满足
             assertError(()=>{
                 return vjs({
@@ -820,7 +820,7 @@ Deno.test({
                     }
                 })
             },
-            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs:root/validate:object/properties/c/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:object/properties/c/validate:string]: String Validation Failed <= [RestrictionError@vjs:root/validate:object/properties/c/validate:string/minLength|maxLength]: Restriction Not Satisfied`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [ValidationError@vjs:root/validate:object/properties:c/validate:string]: Validation Failed <= [StringValidationError@vjs:root/validate:object/properties:c/validate:string]: String Validation Failed <= [RestrictionError@vjs:root/validate:object/properties:c/validate:string/minLength|maxLength]: Restriction Not Satisfied`)
             // 不允许其它字段
             assertError(()=>{
                 return vjs({
@@ -840,7 +840,7 @@ Deno.test({
                     additionalProperties: false
                 })
             },
-            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [InvalidPropertyError@vjs:root/validate:object/properties/e]: Property Not Allowed`)
+            `[ValidationError@vjs:root/validate:object]: Validation Failed <= [ObjectValidationError@vjs:root/validate:object]: Object Validation Failed <= [RestrictionError@vjs:root/validate:object/properties]: Properties Restriction Not Satisfied <= [InvalidPropertyError@vjs:root/validate:object/properties:e]: Property Not Allowed`)
             // 属性值类型约定
             assertError(()=>{
                 return vjs({

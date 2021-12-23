@@ -808,8 +808,7 @@ function validateObject(target: any, schema: { [key: string]: any }, refs: schem
                                         // 这里的 try 是为了吞掉尝试检查时抛出的错误
                                         try {
                                             // 这里有可能出现错误，所以外面还有一个 try 进行捕捉
-                                            propertiesChain.push(`properties`)
-                                            propertiesChain.push(realKey)
+                                            propertiesChain.push(`properties:${realKey}`)
                                             const propSchema = new JSchemaBase(propSchemaItems[j],propertiesChain)
                                             vjs(target[realKey],propSchema,refs,propertiesChain)
                                             // 有一个类型吻合即可
@@ -827,8 +826,7 @@ function validateObject(target: any, schema: { [key: string]: any }, refs: schem
                                     // 没有找到任何吻合
                                     if (yon === false) {
                                         let propertiesChain = JSON.parse(JSON.stringify(chain))
-                                        propertiesChain.push(`properties`)
-                                        propertiesChain.push(key)
+                                        propertiesChain.push(`properties:${key}`)
                                         throw new NiceError(ErrorInfo.PROPERTIES_VALIDATION_FAILED, {
                                             name: ErrorType.RESTRICTION_ERROR,
                                             chain: propertiesChain
@@ -837,8 +835,7 @@ function validateObject(target: any, schema: { [key: string]: any }, refs: schem
                                 }
                                 else {
                                     let propertiesChain = JSON.parse(JSON.stringify(chain))
-                                    propertiesChain.push(`properties`)
-                                    propertiesChain.push(key)
+                                    propertiesChain.push(`properties:${key}`)
                                     throw new NiceError(ErrorInfo.INVALID_SCHEMA_DEF + `, [${key}] Should Be An Array Of JSchema`, {
                                         name: ErrorType.SCHEMA_DEF_ERROR,
                                         chain: propertiesChain,
@@ -850,8 +847,7 @@ function validateObject(target: any, schema: { [key: string]: any }, refs: schem
                             }
                             else {
                                 let propertiesChain = JSON.parse(JSON.stringify(chain))
-                                propertiesChain.push(`properties`)
-                                propertiesChain.push(key)
+                                propertiesChain.push(`properties:${key}`)
                                 vjs(target[key],propertySchemas[key],refs,propertiesChain)
                             }
                         }
@@ -862,8 +858,7 @@ function validateObject(target: any, schema: { [key: string]: any }, refs: schem
                             // 如果这个 key 没有包含在 properties 定义中，则检查 addtionalProperties 的值
                             if (propertyKeys.indexOf(key) < 0) {
                                 if (allowOthers !== true) {
-                                    propertiesChain.push(`properties`)
-                                    propertiesChain.push(key)
+                                    propertiesChain.push(`properties:${key}`)
                                     throw new NiceError(ErrorInfo.PROPERTY_NOT_ALLOWED, {
                                         name: ErrorType.INVALID_PROPERTY_ERROR,
                                         chain: propertiesChain
