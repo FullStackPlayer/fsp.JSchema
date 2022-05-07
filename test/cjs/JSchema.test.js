@@ -378,7 +378,7 @@ test("JSchema Type [date]", () => {
         assertError(()=>{
             return vjs(new Date(),{
                 type: typeStr,
-                min: new Date(2022,0,0)
+                min: new Date(2050,0,0)
             })
         },
         '[ValidationError@vjs:root/validate:date]: Validation Failed <= [DateValidationError@vjs:root/validate:date]: Date Validation Failed <= [RestrictionError@vjs:root/validate:date/min|max]: Restriction Not Satisfied')

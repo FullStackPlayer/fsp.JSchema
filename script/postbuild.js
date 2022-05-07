@@ -1,8 +1,17 @@
 const fs = require('fs')
 const path = require('path')
+
 // 更改 import 语句中的后缀
-const filePath = path.join(process.cwd(),'src','JSchema.ts')
-let content = fs.readFileSync(filePath, 'utf-8')
-content = content.replace('./NiceError.js','./NiceError.ts')
-fs.writeFileSync(filePath, content)
+replace('JSchema', ['NiceError'])
+
+function replace(fileName, codeFiles) {
+    let filePath = path.join(process.cwd(),'src',`${fileName}.ts`)
+    let content = fs.readFileSync(filePath, 'utf-8')
+    for (let i=0; i<codeFiles.length; i++) {
+        let codeFile = codeFiles[i]
+        content = content.replace(`./${codeFile}.js`,`./${codeFile}.ts`)
+    }
+    fs.writeFileSync(filePath, content)
+}
+
 process.exit()
